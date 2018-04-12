@@ -1,12 +1,18 @@
 # CrowdsaleModules - WhiteList
 
 
-## Required
-3.  edit config file
+## Project
+1.  edit config file
 ```sh
+# dev
 nano ecosystem.development.json
+
+# prod
+nano ecosystem.production.json
+nano build.sh
 ```
-4. run
+
+2. run
 ```sh
 npm i
 

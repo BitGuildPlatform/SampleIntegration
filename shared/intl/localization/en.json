@@ -5,7 +5,7 @@
       "en": "English"
     },
     "buttons": {
-      "submit": "Send 0.01 ETH"
+      "submit": "Send {amount} {name}"
     }
   },
   "errors": {

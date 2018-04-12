@@ -5,14 +5,14 @@
       "watch": [
         "server"
       ],
-      "cwd": "/Users/trejgun/projects/BitGuildPlatform/test-game",
+      "cwd": "/Users/trejgun/projects/BitGuildPlatform/SampleIntegration",
       "script": "server/server.js",
       "exec_interpreter": "node_modules/.bin/babel-node",
       "exec_mode": "fork",
       "env": {
         "NODE_ENV": "development",
         "PORT": "5000",
-        "TEST_CONTRACT_ADDR": "0x38ef42a42d009d1a4d8b9790e4b45a64efaa1174",
+        "TEST_CONTRACT_ADDR": "0xB54AFFF5dB6c165548808A9ecfb234bA24bDCeEb",
         "TOKEN_CONTRACT_ADDR": "0x7E43581b19ab509BCF9397a2eFd1ab10233f27dE"
       }
     }

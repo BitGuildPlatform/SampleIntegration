@@ -4,10 +4,12 @@ import {FormattedMessage, injectIntl, intlShape} from "react-intl";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {messageShow} from "../../actions/message";
-import {Button, ButtonToolbar, Form, FormControl} from "react-bootstrap";
+import {Button, ButtonToolbar, Form} from "react-bootstrap";
 import Message from "../common/message";
+import Init from "../common/init";
 import MetaMaskPopup from "../common/metamask";
 import {TAKE_MY_MONEY} from "../../../shared/constants/actions";
+import sdk from "../../utils/sdk";
 
 
 @injectIntl
@@ -25,9 +27,21 @@ export default class Pay extends Component {
 	};
 
 	state = {
-		amount: 0.01, // ETH
+		amount: 0,
+		name: "",
 		wallet: this.props.account.wallet
 	};
+
+	componentDidMount() {
+		sdk.isOnPortal()
+			.then(isOnPortal => {
+				this.setState({
+					amount: isOnPortal ? 42 : 0.01,
+					name: isOnPortal ? "PLAT" : "ETH",
+				});
+			})
+
+	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
@@ -45,11 +59,15 @@ export default class Pay extends Component {
 	}
 
 	renderForm() {
+		if (!this.state.amount) {
+			return null;
+		}
+
 		return (
 			<Form onSubmit={::this.onSubmit} inline>
 				<ButtonToolbar>
 					<Button type="submit">
-						<FormattedMessage id="components.buttons.submit"/>
+						<FormattedMessage id="components.buttons.submit" values={this.state}/>
 					</Button>
 				</ButtonToolbar>
 			</Form>
@@ -60,6 +78,7 @@ export default class Pay extends Component {
 		return (
 			<div>
 				<MetaMaskPopup/>
+				<Init/>
 
 				{this.renderForm()}
 
