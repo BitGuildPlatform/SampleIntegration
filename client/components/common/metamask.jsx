@@ -38,13 +38,13 @@ export default class MetaMaskPopup extends Component {
         }, 100)
       });
     } else {
-	    this.props.dispatch({
-		    type: MESSAGE_ADD,
-		    payload: {
-			    status: 418, // I'm a teapot
-			    message: "metamask-is-not-installed"
-		    }
-	    });
+      this.props.dispatch({
+        type: MESSAGE_ADD,
+        payload: {
+          status: 418, // I'm a teapot
+          message: "metamask-is-not-installed"
+        }
+      });
     }
   }
 

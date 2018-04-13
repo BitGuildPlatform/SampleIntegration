@@ -15,7 +15,7 @@ contract BitGuildToken { // implements ERC20Interface
 contract Ownable {
   address public owner;
 
-  function Ownable() public {
+  function constructor() public {
     owner = msg.sender;
   }
 
@@ -35,7 +35,7 @@ contract TestContract is Ownable {
 
     BitGuildToken public tokenContract;
 
-    function TestContract(address _tokenContract) public {
+    function constructor(address _tokenContract) public {
         tokenContract = BitGuildToken(_tokenContract);
     }
 
