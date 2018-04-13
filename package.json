@@ -26,7 +26,7 @@
     "bootstrap": "3.3.7",
     "body-parser": "1.18.2",
     "express": "5.0.0-alpha.6",
-    "bitguild-sdk": "0.0.6",
+    "bitguild-sdk": "git+ssh://github.com/BitGuildPlatform/BitGuildPortalSDK.git#8324ae71018981dc3f08de57ab11195a2cfa3501",
     "history": "4.7.2",
     "intl": "1.2.5",
     "intl-locales-supported": "1.0.0",
