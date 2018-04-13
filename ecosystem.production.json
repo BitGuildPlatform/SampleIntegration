@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "Pay",
+      "name": "TestGame",
       "script": "build/server/server.js",
       "exec_mode": "cluster",
       "env": {
