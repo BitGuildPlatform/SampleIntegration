@@ -1,5 +1,5 @@
 import HTML from "../../client/HTML";
-import {renderInitialMarkup, renderHTML} from "./render";
+import {renderHTML, renderInitialMarkup} from "./render";
 import {defaultLanguage, enabledLanguages} from "../../shared/constants/language";
 import {localization} from "../../shared/intl/setup";
 import App from "../../client/app";

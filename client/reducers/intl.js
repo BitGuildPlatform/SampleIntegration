@@ -1,4 +1,4 @@
-import {enabledLanguages, defaultLanguage} from "../../shared/constants/language";
+import {defaultLanguage, enabledLanguages} from "../../shared/constants/language";
 import {localization} from "../../shared/intl/setup";
 import {SWITCH_LANGUAGE} from "../../shared/constants/actions";
 

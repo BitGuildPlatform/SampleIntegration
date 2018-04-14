@@ -5,21 +5,21 @@ import {connect} from "react-redux";
 
 
 @connect(
-	state => ({
-		intl: state.intl
-	})
+  state => ({
+    intl: state.intl
+  })
 )
 export default class IntlWrapper extends Component {
-	static propTypes = {
-		children: PropTypes.element.isRequired,
-		intl: PropTypes.object
-	};
+  static propTypes = {
+    children: PropTypes.element.isRequired,
+    intl: PropTypes.object
+  };
 
-	render() {
-		return (
-			<IntlProvider {...this.props.intl} >
-				{this.props.children}
-			</IntlProvider>
-		);
-	}
+  render() {
+    return (
+      <IntlProvider {...this.props.intl} >
+        {this.props.children}
+      </IntlProvider>
+    );
+  }
 }

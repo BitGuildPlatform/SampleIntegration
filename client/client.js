@@ -10,7 +10,7 @@ const store = configureStore(window.__INITIAL_STATE__);
 hydrate(App, store);
 
 if (module.hot) {
-	module.hot.accept("./app", () => {
-		hydrate(App, store);
-	});
+  module.hot.accept("./app", () => {
+    hydrate(App, store);
+  });
 }
