@@ -83,7 +83,7 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			"process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      "process.env.WHITELIST_CONTRACT_ADDR": JSON.stringify(process.env.WHITELIST_CONTRACT_ADDR),
+      "process.env.TOKEN_CONTRACT_ADDR": JSON.stringify(process.env.TOKEN_CONTRACT_ADDR),
       "process.env.TEST_CONTRACT_ADDR": JSON.stringify(process.env.TEST_CONTRACT_ADDR)
 		}),
 		new ProgressBarPlugin()
