@@ -17,6 +17,6 @@
     "not-found": "`{name}` not found",
     "conflict": "This {name} already exists in db",
     "server-error": "Internal Server Error",
-    "metamask-is-not-installed": "You have to install <a href='https://metamask.io/' target='_blank'>MetaMask</a> to use this form."
+    "metamask-is-not-installed": "You have to install <a href='https://metamask.io/' target='_blank'>MetaMask</a>"
   }
 }
