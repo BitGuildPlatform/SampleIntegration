@@ -57,7 +57,13 @@ export default class Pay extends Component {
   }
 
   renderForm() {
+    // initial render
     if (!this.state.amount) {
+      return null;
+    }
+
+    // metamask is not logged in
+    if (!this.state.wallet) {
       return null;
     }
 
