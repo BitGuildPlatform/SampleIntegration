@@ -32,7 +32,6 @@ contract Ownable {
 }
 
 contract TestContract is Ownable {
-
     BitGuildToken public tokenContract;
 
     function constructor(address _tokenContract) public {
@@ -44,16 +43,28 @@ contract TestContract is Ownable {
         selfdestruct(msg.sender);
     }
 
-    function deposit() public payable {}
+    function buyItem(bytes _id) public payable {
+      require(msg.value != 0);
+      require(_id.length != 0);
+      _buyItem(_id)
+    }
 
     function receiveApproval(address _sender, uint256 _value, BitGuildToken _tokenContract, bytes _extraData) public {
         require(_tokenContract == tokenContract);
         require(_tokenContract.transferFrom(_sender, address(this), _value));
         require(_extraData.length != 0);
+        _buyItem(_extraData)
+    }
+
+    withdrawToken() public {
+
+    }
+
+    function _buyItem(bytes _id) private {
+        // do something with item
     }
 
     function () external payable {
       revert();
     }
-
 }

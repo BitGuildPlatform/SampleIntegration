@@ -19,7 +19,7 @@ function * shutUpAndTakeMyMoney(action) {
       });
     } else {
       const contract = window.web3.eth.contract(TestGameABI).at(process.env.TEST_CONTRACT_ADDR);
-      transaction = yield bluebird.promisify(contract.deposit)({
+      transaction = yield bluebird.promisify(contract.buyItem)("0xdeadbeef", {
         from: action.payload.wallet,
         value: action.payload.amount * 1e18,
         gas: window.web3.toHex(15e4),
