@@ -1,0 +1,22 @@
+{
+  "components": {
+    "switchLanguage": "Switch Language",
+    "language": {
+      "en": "English"
+    },
+    "buttons": {
+      "submit": "Send {amount} {name}"
+    }
+  },
+  "errors": {
+    "method-not-allowed": "Method not allowed",
+    "page-not-found": "Page Not Found",
+    "invalid-param": "Invalid param `{name}`, {reason}",
+    "required-param": "Required param `{name}` missing",
+    "access-denied": "Access denied",
+    "not-found": "`{name}` not found",
+    "conflict": "This {name} already exists in db",
+    "server-error": "Internal Server Error",
+    "metamask-is-not-installed": "You have to install <a href='https://metamask.io/' target='_blank'>MetaMask</a>"
+  }
+}
