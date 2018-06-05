@@ -5,7 +5,7 @@
       "watch": [
         "server"
       ],
-      "cwd": "/Users/trejgun/projects/BitGuildPlatform/SampleIntegration",
+      "cwd": ".",
       "script": "server/server.js",
       "exec_interpreter": "node_modules/.bin/babel-node",
       "exec_mode": "fork",
