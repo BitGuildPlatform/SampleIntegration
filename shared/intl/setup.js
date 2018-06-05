@@ -48,8 +48,6 @@ function flattenMessages(nestedMessages = {}, prefix = "") {
 import "intl/locale-data/jsonp/en";
 import en from "react-intl/locale-data/en";
 import enData from "./localization/en";
-import enCountries from "./localization/countries.en.json";
-enData.countries = enCountries;
 addLocaleData(en);
 localization.en = {
 	id: "en",
