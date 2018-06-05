@@ -1,18 +1,15 @@
 import React from "react";
 import {renderToStaticMarkup, renderToString} from "react-dom/server";
-import {Provider} from "react-redux";
 import {StaticRouter} from "react-router";
-import IntlWrapper from "../../shared/intl/IntlWrapper";
+import {Provider} from "react-intl-redux";
 
 
 export function renderInitialMarkup(url, store, context, App) {
   return renderToString(
     <Provider store={store}>
-      <IntlWrapper>
-        <StaticRouter location={url} context={context}>
-          <App />
-        </StaticRouter>
-      </IntlWrapper>
+      <StaticRouter location={url} context={context}>
+        <App />
+      </StaticRouter>
     </Provider>
   );
 }

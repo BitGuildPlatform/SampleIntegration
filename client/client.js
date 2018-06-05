@@ -1,7 +1,7 @@
 import "./styles.less";
 import "../static/favicon.ico";
 import App from "./app";
-import hydrate from "./utils/hydrate";
+import hydrate from "./utils/render";
 import configureStore from "./store";
 
 

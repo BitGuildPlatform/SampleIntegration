@@ -1,10 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 
 
 module.exports = {
+  mode: process.env.NODE_ENV,
   devtool: "source-map",
   entry: {
     client: ["./client/client"]
@@ -13,7 +14,7 @@ module.exports = {
     path: path.join(__dirname, "..", "..", "build", "bundle"),
     filename: "[name].js",
     sourceMapFilename: "[file].map",
-    chunkFilename: "[id].js",
+    chunkFilename: "[name].js",
     publicPath: "/bundle/"
   },
   externals: {
@@ -29,17 +30,13 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.less$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: [{
-          loader: "css-loader"
-        }, {
-          loader: "postcss-loader"
-        }, {
-          loader: "less-loader"
-        }]
-      })
+      test: /\.(le|c)ss$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        "css-loader",
+        "postcss-loader",
+        "less-loader"
+      ]
     }, {
       test: /\.(ttf|woff|woff2|eot|svg|gif|png|ico)(\?.+)?$/,
       use: [{
@@ -52,14 +49,17 @@ module.exports = {
         loader: "babel-loader",
         options: {
           babelrc: false,
-          presets: ["@babel/react", [
-            "@babel/env",
-            {
-              targets: {
-                browsers: ["last 2 versions"]
+          presets: [
+            "@babel/react",
+            [
+              "@babel/env",
+              {
+                targets: {
+                  browsers: ["last 2 versions"]
+                }
               }
-            }
-          ]],
+            ]
+          ],
           plugins: [
             "@babel/proposal-decorators",
             "@babel/proposal-class-properties",
@@ -72,12 +72,9 @@ module.exports = {
       }]
     }]
   },
-  mode: "production",
-  optimization: {
-    minimize: true
-  },
   plugins: [
-    new ExtractTextPlugin({
+    new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
       filename: "[name].css",
       allChunks: true
     }),
@@ -90,5 +87,9 @@ module.exports = {
   ],
   performance: {
     hints: false
+  },
+  optimization: {
+    minimize: true,
+    splitChunks: false
   }
 };
