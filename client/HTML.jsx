@@ -8,12 +8,21 @@ export default class HTML extends React.Component {
     initialState: PropTypes.object
   };
 
-  renderScripts() {
+  renderReact() {
     const build = process.env.NODE_ENV === "production" ? "production.min" : "development";
     return (
       <>
         <script src={`https://unpkg.com/react@16.3.2/umd/react.${build}.js`} type="text/javascript" crossOrigin="anonymous" />
         <script src={`https://unpkg.com/react-dom@16.3.2/umd/react-dom.${build}.js`} type="text/javascript" crossOrigin="anonymous" />
+      </>
+    );
+  }
+
+  renderSDK() {
+    const url = process.env.NODE_ENV === "production" ? "www.bitguild.com" : "localhost:5000";
+    return (
+      <>
+        <script src={`http://${url}/sdk/BitGuildPortalSDK_v0.1.js`} type="text/javascript" crossOrigin="anonymous" />
       </>
     );
   }
@@ -36,8 +45,8 @@ export default class HTML extends React.Component {
         <body>
           <div id="app" dangerouslySetInnerHTML={{__html: this.props.initialMarkup}} />
           <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__ = ${JSON.stringify(this.props.initialState)}`}} />
-          {this.renderScripts()}
-          <script src={"http://localhost:5000/sdk/BitGuildPortalSDK_v0.1.js"} type="text/javascript" crossOrigin="anonymous" />
+          {this.renderReact()}
+          {this.renderSDK()}
           <script src={"/bundle/client.js"} type="text/javascript" crossOrigin="anonymous" />
         </body>
       </html>

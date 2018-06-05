@@ -9,6 +9,7 @@
     "browser": true
   },
   "plugins": [
+    "babel",
     "mocha",
     "react"
   ],
@@ -54,7 +55,8 @@
       0,
       "tab"
     ],
-    "quotes": [
+    "quotes": 0,
+    "babel/quotes": [
       2,
       "double"
     ],

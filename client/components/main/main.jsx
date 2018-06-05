@@ -22,31 +22,29 @@ export default class Pay extends Component {
   };
 
   state = {
-    amount: 0.01,
-    name: "ETH",
+    amount: 0,
+    name: "",
     wallet: this.props.account.wallet
   };
 
-  componentDidMount() {
-    window.sdk.default.isOnPortal()
-      .then(isOnPortal => {
-        console.log("componentDidMount:isOnPortal", isOnPortal);
-        return window.sdk.default.getUser()
-          .then(user => {
-            console.log("componentDidMount:user", user);
-            this.setState({
-              amount: isOnPortal ? 42 : this.state.amount,
-              name: isOnPortal ? "PLAT" : this.state.name,
-              user: user
-            });
-          });
-      });
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      wallet: nextProps.account.wallet
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      wallet: nextProps.account.wallet
-    });
+  componentDidMount() {
+    window.sdk.default.isOnPortal()
+      .then(isOnPortal =>
+        window.sdk.default.getUser()
+          .then(user =>
+            this.setState({
+              amount: isOnPortal ? 42 : 0.01,
+              name: isOnPortal ? "PLAT" : "ETH",
+              user: user
+            })
+          )
+      );
   }
 
   onSubmit(e) {
@@ -81,8 +79,6 @@ export default class Pay extends Component {
   }
 
   render() {
-    console.log("this.state", this.state);
-
     return (
       <div>
         <MetaMaskPopup />
