@@ -1,22 +1,20 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {FormattedHTMLMessage} from "react-intl";
-import {messageRemove} from "../../actions/message";
 import {Alert} from "react-bootstrap";
+import {MESSAGE_REMOVE, MESSAGE_REMOVE_ALL} from "../../../shared/constants/actions";
 
 
 @connect(
   state => ({
     messages: state.messages
-  }),
-  dispatch => bindActionCreators({messageRemove}, dispatch)
+  })
 )
 export default class Message extends Component {
   static propTypes = {
     messages: PropTypes.array,
-    messageRemove: PropTypes.func
+    dispatch: PropTypes.func
   };
 
   static defaultProps = {
@@ -24,19 +22,25 @@ export default class Message extends Component {
   };
 
   componentWillUnmount() {
-    this.props.messages.map(message =>
-      this.props.messageRemove(message)
-    );
+    const {dispatch} = this.props;
+
+    dispatch({
+      type: MESSAGE_REMOVE_ALL
+    });
   }
 
   onDismiss(message) {
+    const {dispatch} = this.props;
+
     return () => {
-      this.props.messageRemove(message);
+      dispatch({
+        payload: message,
+        type: MESSAGE_REMOVE
+      });
     };
   }
 
   renderMessage(message, i) {
-    console.error(message.status)
     return (
       <Alert key={i} bsStyle={message.type || "danger"} onDismiss={::this.onDismiss(message)}>
         {message.status ? <FormattedHTMLMessage id={`errors.${message.message}`} values={message} /> : message.message}

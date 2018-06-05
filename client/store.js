@@ -3,19 +3,29 @@ import createSagaMiddleware from "redux-saga";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import {createLogger} from "redux-logger";
-import rootReducers from "./reducers/index";
+import rootReducers from "./reducers";
+import rootSaga from "./sagas";
+import {defaultLanguage, enabledLanguages} from "../shared/constants/language";
+import {localization} from "../shared/intl/setup";
 
-import userSaga from "./sagas/user";
 
+const defaultState = {
+  intl: {
+    locale: defaultLanguage,
+    defaultLocale: defaultLanguage,
+    enabledLanguages,
+    ...(localization[defaultLanguage] || {})
+  }
+};
 
-export default function(initialState = {}) {
+export default function(initialState = defaultState) {
   const sagaMiddleware = createSagaMiddleware();
 
   const middlewares = [thunkMiddleware, sagaMiddleware];
 
   let composeEnhancers = compose;
 
-  if (process.env.NODE_ENV === "development" && !process.env.PORT) {
+  if (process.env.NODE_ENV === "development") {
     middlewares.push(createLogger());
   }
 
@@ -25,7 +35,7 @@ export default function(initialState = {}) {
 
   const store = createStore(rootReducers, initialState, composeEnhancers(applyMiddleware(...middlewares)));
 
-  sagaMiddleware.run(userSaga);
+  sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

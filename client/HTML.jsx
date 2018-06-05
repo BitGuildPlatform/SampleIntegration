@@ -9,16 +9,13 @@ export default class HTML extends React.Component {
   };
 
   renderScripts() {
-    if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging") {
-      return (
-        <div>
-          <script src="https://unpkg.com/react@16.3.1/umd/react.production.min.js" type="text/javascript" crossOrigin="anonymous" />
-          <script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.production.min.js" type="text/javascript" crossOrigin="anonymous" />
-        </div>
-      );
-    } else {
-      return null;
-    }
+    const build = process.env.NODE_ENV === "production" ? "production.min" : "development";
+    return (
+      <>
+        <script src={`https://unpkg.com/react@16.3.2/umd/react.${build}.js`} type="text/javascript" crossOrigin="anonymous" />
+        <script src={`https://unpkg.com/react-dom@16.3.2/umd/react-dom.${build}.js`} type="text/javascript" crossOrigin="anonymous" />
+      </>
+    );
   }
 
   render() {
@@ -40,6 +37,7 @@ export default class HTML extends React.Component {
           <div id="app" dangerouslySetInnerHTML={{__html: this.props.initialMarkup}} />
           <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__ = ${JSON.stringify(this.props.initialState)}`}} />
           {this.renderScripts()}
+          <script src={"http://localhost:5000/sdk/BitGuildPortalSDK_v0.1.js"} type="text/javascript" crossOrigin="anonymous" />
           <script src={"/bundle/client.js"} type="text/javascript" crossOrigin="anonymous" />
         </body>
       </html>
